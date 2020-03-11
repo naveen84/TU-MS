@@ -23,20 +23,15 @@ public class RestaurantResource {
 	
 	@RequestMapping("/restaurant")
 	@PostMapping(consumes = "{application/json}",produces = "{application/json}")
-	public Restaurant save(@RequestBody Restaurant restaurant) throws Exception {
+	public Restaurant save(@RequestBody Restaurant restaurant) {
 		System.out.println("INPUT : "+restaurant);
-		if(restaurant!=null)
-			service.save(restaurant);
-		else
-			throw new Exception("EMPTY DATA FOUND");
+		service.save(restaurant);
 		return restaurant;
 	}
 	
 	@RequestMapping("/restaurant/{name}")
 	@GetMapping
-	public List<Menu> getMenuByRestaurantName(@PathVariable("name")String restaurantName) throws Exception {
-		if(!StringUtil.isNotEmpty(restaurantName))
-			throw new Exception("EMPTY DATA FOUND");
+	public List<Menu> getMenuByRestaurantName(@PathVariable("name")String restaurantName) {
 		return service.getMenu(restaurantName);
 	}
 }
